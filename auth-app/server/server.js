@@ -9,7 +9,15 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // Middleware
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+
+app.use(cors({
+  origin: ['http://localhost:5173', 'https://auth-app-seven-ruddy.vercel.app'], // ✅ add your Vercel domain
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+}));
+
+
 app.use(express.json()); // To parse JSON bodies
 
 // Connect to MongoDB
