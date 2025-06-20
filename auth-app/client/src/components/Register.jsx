@@ -5,13 +5,13 @@ import { useNavigate, Link } from 'react-router-dom';
 const Register = () => {
   const [formData, setFormData] = useState({ name: '', dob: '', email: '', password: '' });
   const navigate = useNavigate();
-
+  const API = import.meta.env.VITE_API_BASE_URL;
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5001/api/auth/register', formData);
+      const res = await axios.post(`${API}/api/auth/register`, formData);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       navigate('/dashboard');
